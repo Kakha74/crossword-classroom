@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Food & Drinks • Crossword Classroom</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#1c2d38;background:#f4f7fb;font-synthesis:none}*{box-sizing:border-box}body{margin:0}header{background:linear-gradient(125deg,#156a84,#283b83);color:white;padding:25px 16px 30px;text-align:center}header h1{font-size:clamp(24px,5vw,36px);margin:4px 0 7px}header p{margin:0;color:#e7f4ff}main{max-width:1020px;margin:-15px auto 35px;padding:0 12px}.panel{background:white;border:1px solid #e4eaf0;border-radius:17px;padding:17px;box-shadow:0 5px 25px #1f37600d}.stats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:15px}.pill{background:#eaf4fd;border-radius:100px;padding:8px 13px;font-weight:650;font-size:14px}.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:16px;align-items:start}.boardwrap{overflow-x:auto;display:flex;justify-content:center}.board{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));width:min(100%,460px);border:1px solid #dae4ed;background:#dae4ed;gap:2px;padding:2px;border-radius:7px;touch-action:manipulation}.cell{aspect-ratio:1;min-width:0;position:relative;background:white;display:flex;align-items:center;justify-content:center;border-radius:2px}.cell.block{background:#dce4ed}.cell.active{background:#cdeaf6}.cell.current{outline:3px solid #186b9d;outline-offset:-3px;z-index:2;background:#fff7d0}.cell.correct{background:#d8f5df}.cell.wrong{background:#ffe0dd}.cell .num{position:absolute;top:1px;left:3px;font-size:clamp(8px,1.8vw,10px);color:#556978;pointer-events:none}.cell input{width:100%;height:100%;border:0;outline:0;text-align:center;background:transparent;font:700 clamp(15px,3.6vw,24px)/1 system-ui;color:#163747;text-transform:uppercase;caret-color:transparent;padding:8px 0 0;border-radius:0}.clues h3{font-size:16px;margin:17px 0 8px}.clue{display:block;width:100%;text-align:left;border:1px solid transparent;border-radius:9px;background:transparent;cursor:pointer;padding:9px;font-size:14px;line-height:1.35;color:#243d4e}.clue:hover{background:#f0f6fa}.clue.selected{background:#e2f3ff;border-color:#8fcfe9}.clue.solved{color:#178049}.clue b{color:#126787}.controls{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}button.action{padding:11px 15px;border-radius:10px;border:1px solid #c5d7e5;background:white;color:#1e516e;font-weight:700;cursor:pointer;min-height:44px}button.primary{background:#166b89;color:white;border-color:#166b89}button.action:focus-visible,.clue:focus-visible{outline:3px solid #ffbd51}.notice{margin-top:13px;border-radius:10px;padding:12px;background:#eff6fa;font-size:14px;line-height:1.55}.small{color:#5c7180;font-size:13px;line-height:1.5}.hidden{display:none!important}@media(max-width:750px){header{padding:20px 12px 29px}.layout{grid-template-columns:1fr}.panel{padding:12px}.board{width:min(100%,430px)}.clues{display:grid;grid-template-columns:1fr 1fr;gap:12px}.clues h3{margin-top:7px}}@media(max-width:490px){.clues{grid-template-columns:1fr}.board{gap:1px;padding:1px}.cell .num{font-size:8px;top:0;left:2px}.cell input{font-size:clamp(13px,4vw,21px)}}
+
+.modebar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.field{display:grid;gap:5px;margin:10px 0}.field input{padding:12px;border:1px solid #b6ccdc;border-radius:10px;font-size:16px;max-width:380px;width:100%}.leader{border-collapse:collapse;width:100%;font-size:15px}.leader th,.leader td{text-align:left;padding:10px 8px;border-bottom:1px solid #e7eef4}.leader th{color:#5b6d79;font-size:13px}.leader tr:first-child td{font-weight:800;color:#0d7289}.teacher{margin-bottom:14px}.teachergrid{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:15px}.qr{width:180px;height:180px;max-width:100%;background:white;border:1px solid #dce8ed;border-radius:12px;padding:7px}.linkbox{word-break:break-all;background:#f1f6fa;border-radius:9px;padding:10px;font-size:13px}.ok{color:#087b58;font-weight:700}.warning{color:#9b5714;font-weight:600}.mini{font-size:13px;color:#536e7d}.teacheronly{display:none}.studentonly{display:block}.teacher-mode .teacheronly{display:block}.teacher-mode .studentonly{display:none}.teacher-mode .layout,.teacher-mode .stats{display:none}#submit{background:#0a805c;border-color:#0a805c}button:disabled{opacity:.55;cursor:not-allowed}@media(max-width:600px){.teachergrid{grid-template-columns:1fr}.qr{width:180px;height:180px}}
+</style>
+</head>
+<body>
+<header><div>🎓 AI Crossword Classroom</div><h1>Food & Drinks</h1><p>English A1–A2 · 10 words · Interactive crossword</p></header>
+<main>
+<section class="panel teacher" id="sessionPanel">
+ <div class="modebar"><button class="action primary" id="studentMode">🎮 მოსწავლის რეჟიმი</button><button class="action" id="teacherMode">📺 ლექტორის ეკრანი</button></div>
+ <div id="setupWarning" class="notice"></div>
+ <div class="studentonly">
+   <div class="field"><label for="studentName"><b>მონაწილის სახელი</b></label><input id="studentName" maxlength="30" placeholder="მაგ. მარიამი" autocomplete="nickname"></div>
+   <p class="mini">შეავსეთ კროსვორდი, შეამოწმეთ პასუხები და დააჭირეთ „შედეგის გაგზავნას“. თითო მონაწილეს ერთი საბოლოო გაგზავნა შეუძლია.</p>
+   <div class="controls"><button class="action" id="submit">🏁 შედეგის გაგზავნა</button></div>
+   <div id="submitStatus" class="mini" role="status" aria-live="polite"></div>
+ </div>
+ <div class="teacheronly">
+   <h2>🏆 ცოცხალი შედეგები</h2><div class="teachergrid"><div>
+   <p class="small">გახსენით ეს გვერდი ლექტორის კომპიუტერზე, QR კოდი აჩვენეთ პროექტორზე. მოსწავლეთა შედეგები პერიოდულად განახლდება.</p>
+   <div class="field"><label for="roomInput">ოთახის კოდი</label><input id="roomInput" maxlength="30" value="CLASS2026" /></div>
+   <div class="linkbox" id="joinUrl"></div><div class="controls"><button class="action" id="copyLink">🔗 ბმულის კოპირება</button><button class="action" id="refreshScores">↻ შედეგების განახლება</button></div>
+   <p class="mini" id="leaderStatus">მონაწილეები: 0</p></div>
+   <div><img class="qr" id="qrImage" alt="მოსწავლეებისთვის გასაზიარებელი QR კოდი"><p class="mini">სკანირებით იხსნება სასწავლო თამაში</p></div></div>
+   <table class="leader"><thead><tr><th>#</th><th>მონაწილე</th><th>ქულა</th><th>დასრულება</th></tr></thead><tbody id="leaderBody"><tr><td colspan="4">შედეგები ჯერ არ არის</td></tr></tbody></table>
+ </div>
+</section>
+<div class="stats"><span class="pill" id="progress">შევსებულია: 0/10</span><span class="pill" id="score">ქულა: — / 100</span><span class="pill">🧩 10 გადამკვეთი სიტყვა</span></div>
+<div class="layout"><section class="panel"><div class="boardwrap"><div class="board" id="board" aria-label="Interactive crossword puzzle"></div></div><div class="controls"><button class="action primary" id="check">✓ პასუხების შემოწმება</button><button class="action" id="reset">↻ თავიდან დაწყება</button><button class="action" id="reveal">👁 სწორი პასუხები</button></div><div id="message" class="notice" role="status" aria-live="polite">აირჩიეთ მინიშნება ან კროსვორდის უჯრა. ჩაწერეთ ინგლისური სიტყვები. თითოეული სწორად შევსებული სიტყვა ფასდება 10 ქულით.</div><p class="small">რჩევა: უჯრაზე განმეორებით დაჭერით შეგიძლიათ გადართოთ ჰორიზონტალურ და ვერტიკალურ სიტყვებს შორის. კლავიატურის ისრები და Backspace ასევე მუშაობს.</p></section>
+<aside class="panel"><strong>📘 მინიშნებები (Clues)</strong><p class="small">დააჭირეთ მინიშნებას შესაბამისი სიტყვის გასააქტიურებლად.</p><div class="clues"><div><h3>Across →</h3><div id="across"></div></div><div><h3>Down ↓</h3><div id="down"></div></div></div></aside></div>
+</main>
+<script>
+'use strict';
+const data=[
+{word:'RICE',row:5,col:2,dir:'across',clue:'Small white grains often eaten with chicken.'},
+{word:'BREAD',row:4,col:2,dir:'down',clue:'You can make a sandwich with this food.'},
+{word:'ORANGE',row:0,col:5,dir:'down',clue:'A round citrus fruit; also a colour.'},
+{word:'BANANA',row:3,col:3,dir:'across',clue:'A long yellow fruit.'},
+{word:'WATER',row:7,col:1,dir:'across',clue:'You drink this when you are thirsty.'},
+{word:'CHEESE',row:5,col:4,dir:'down',clue:'A food made from milk; often on pizza.'},
+{word:'APPLE',row:3,col:8,dir:'down',clue:'A round red or green fruit.'},
+{word:'MILK',row:6,col:6,dir:'across',clue:'A white drink that comes from cows.'},
+{word:'JUICE',row:10,col:0,dir:'across',clue:'A drink made from fruit.'},
+{word:'COFFEE',row:0,col:4,dir:'across',clue:'A hot drink often made from roasted beans.'}
+];
+const board=document.getElementById('board'), message=document.getElementById('message');
+const keys=(r,c)=>`${r},${c}`;const cellMap=new Map(),inputs=new Map();const H=11,W=10;
+for(const w of data){for(let i=0;i<w.word.length;i++){let r=w.row+(w.dir==='down'?i:0),c=w.col+(w.dir==='across'?i:0),key=keys(r,c);if(!cellMap.has(key))cellMap.set(key,{letter:w.word[i],words:[]});if(cellMap.get(key).letter!==w.word[i])throw Error('Invalid crossword collision');cellMap.get(key).words.push(w);}}
+const starts=new Map();data.slice().sort((a,b)=>a.row-b.row||a.col-b.col).forEach(w=>{let k=keys(w.row,w.col);if(!starts.has(k))starts.set(k,starts.size+1);w.number=starts.get(k);});
+let selected=null,focusedKey=null,checked=false,revealed=false;let latestScore=null;
+for(let r=0;r<H;r++)for(let c=0;c<W;c++){
+ const key=keys(r,c),el=document.createElement('div');el.className='cell';const info=cellMap.get(key);
+ if(!info){el.classList.add('block');el.setAttribute('aria-hidden','true');}
+ else{
+  if(starts.has(key)){let n=document.createElement('span');n.className='num';n.textContent=starts.get(key);el.append(n);}
+  const input=document.createElement('input');input.maxLength=1;input.autocomplete='off';input.autocapitalize='characters';input.spellcheck=false;input.inputMode='text';input.setAttribute('aria-label',`Row ${r+1}, column ${c+1}`);input.dataset.key=key;el.append(input);inputs.set(key,input);
+  input.addEventListener('focus',()=>chooseCell(key,false));input.addEventListener('click',()=>chooseCell(key,true));input.addEventListener('input',e=>{if(revealed)return;let value=e.target.value.toUpperCase().replace(/[^A-Z]/g,'');e.target.value=value.slice(-1);checked=false;clearMarks();updateProgress();if(value)jump(1);});
+  input.addEventListener('keydown',e=>{if(e.key==='Backspace'){if(!input.value){e.preventDefault();jump(-1);}else{checked=false;clearMarks();setTimeout(updateProgress,0);}return;}if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();const dr=e.key==='ArrowDown'?1:e.key==='ArrowUp'?-1:0,dc=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;const [y,x]=key.split(',').map(Number),next=inputs.get(keys(y+dr,x+dc));if(next)next.focus();}});
+ }
+ board.append(el);
+}
+function chooseCell(key,clicked){const available=cellMap.get(key).words;let next=available.find(w=>w===selected);if(!next)next=available[0];else if(clicked&&available.length>1)next=available[(available.indexOf(next)+1)%available.length];selected=next;focusedKey=key;paintSelection();}
+function paintSelection(){document.querySelectorAll('.cell').forEach(el=>el.classList.remove('active','current'));document.querySelectorAll('.clue').forEach(el=>el.classList.toggle('selected',Number(el.dataset.index)===data.indexOf(selected)));if(!selected)return;for(let i=0;i<selected.word.length;i++){const key=keys(selected.row+(selected.dir==='down'?i:0),selected.col+(selected.dir==='across'?i:0));inputs.get(key).parentElement.classList.add('active');}if(focusedKey&&inputs.has(focusedKey))inputs.get(focusedKey).parentElement.classList.add('current');}
+function coords(w){return Array.from({length:w.word.length},(_,i)=>keys(w.row+(w.dir==='down'?i:0),w.col+(w.dir==='across'?i:0)));}
+function focusWord(w){selected=w;let keysInWord=coords(w);focusedKey=keysInWord.find(k=>!inputs.get(k).value)||keysInWord[0];inputs.get(focusedKey).focus();paintSelection();}
+function jump(step){if(!selected)return;let list=coords(selected),i=list.indexOf(focusedKey),next=list[i+step];if(next){focusedKey=next;inputs.get(next).focus();}}
+function updateProgress(){const done=data.filter(w=>coords(w).every(k=>inputs.get(k).value)).length;document.getElementById('progress').textContent=`შევსებულია: ${done}/10`;if(!checked)document.getElementById('score').textContent='ქულა: — / 100';}
+function clearMarks(){document.querySelectorAll('.cell').forEach(el=>el.classList.remove('correct','wrong'));document.querySelectorAll('.clue').forEach(el=>el.classList.remove('solved'));}
+function check(){if(revealed)return;clearMarks();checked=true;let correct=0;for(const w of data){const values=coords(w).map(k=>inputs.get(k).value).join('');const ok=values===w.word;if(ok)correct++;const clue=document.querySelector(`.clue[data-index="${data.indexOf(w)}"]`);if(ok)clue.classList.add('solved');}for(const [key,info] of cellMap){const inp=inputs.get(key);if(inp.value)inp.parentElement.classList.add(inp.value===info.letter?'correct':'wrong');}latestScore=correct*10;document.getElementById('score').textContent=`ქულა: ${correct*10} / 100`;message.textContent=correct===10?'🎉 შესანიშნავია! ყველა 10 სიტყვა სწორია. თქვენ მიიღეთ 100 ქულა!':`სწორი სიტყვები: ${correct}/10. ქულა: ${correct*10}/100. მწვანე უჯრა სწორია, წითელი — შესასწორებელი. შეასწორეთ და ხელახლა შეამოწმეთ.`;}
+function reset(){for(const input of inputs.values()){input.value='';input.disabled=false;}revealed=false;checked=false;latestScore=null;clearMarks();message.textContent='თამაში განახლდა. შეავსეთ კროსვორდი და შეამოწმეთ პასუხები.';updateProgress();focusWord(data.find(w=>w.word==='COFFEE'));}
+function reveal(){if(!confirm('გსურთ ყველა სწორი პასუხის ნახვა? ეს დაასრულებს მიმდინარე თამაშს.'))return;for(const [k,info] of cellMap){const inp=inputs.get(k);inp.value=info.letter;inp.disabled=true;}revealed=true;checked=false;latestScore=null;clearMarks();message.textContent='ყველა სწორი პასუხი ნაჩვენებია. ახალი მცდელობისთვის დააჭირეთ „თავიდან დაწყება“. პასუხების ჩვენება ქულას არ ანიჭებს.';document.getElementById('score').textContent='ქულა: — / 100';updateProgress();}
+for(const [dir,id] of [['across','across'],['down','down']]){const target=document.getElementById(id);data.filter(w=>w.dir===dir).sort((a,b)=>a.number-b.number).forEach(w=>{const b=document.createElement('button');b.type='button';b.className='clue';b.dataset.index=data.indexOf(w);b.innerHTML=`<b>${w.number}.</b> ${w.clue} <span style="color:#708697">(${w.word.length})</span>`;b.addEventListener('click',()=>focusWord(w));target.append(b);});}
+document.getElementById('check').addEventListener('click',check);document.getElementById('reset').addEventListener('click',reset);document.getElementById('reveal').addEventListener('click',reveal);updateProgress();selected=data.find(w=>w.word==='COFFEE');paintSelection();
+</script>
+<script>
+// Set the URL and publishable key of a separate Supabase demo project.
+// NEVER use a service_role or secret key in browser code.
+const SUPABASE_URL = '';
+const SUPABASE_PUBLISHABLE_KEY = '';
+</script>
+<script>
+'use strict';
+const configured=Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
+const params=new URLSearchParams(location.search);
+let room=(params.get('room')||'CLASS2026').toUpperCase().replace(/[^A-Z0-9_-]/g,'').slice(0,30)||'CLASS2026';
+let mode=params.get('teacher')==='1'?'teacher':'student';
+const roomInput=document.getElementById('roomInput');roomInput.value=room;
+const setupWarning=document.getElementById('setupWarning');
+const studentName=document.getElementById('studentName');
+studentName.value=localStorage.getItem('crosswordName')||'';
+const sessionKey='crosswordToken:'+room;
+let participantToken=localStorage.getItem(sessionKey);
+if(!participantToken){participantToken=crypto.randomUUID?crypto.randomUUID():('v'+Date.now()+Math.random().toString(16).slice(2));localStorage.setItem(sessionKey,participantToken)}
+let submitted=localStorage.getItem('crosswordSubmitted:'+room)==='1';
+const submitBtn=document.getElementById('submit');
+submitBtn.disabled=submitted;
+if(submitted)document.getElementById('submitStatus').textContent='ამ ოთახში თქვენი შედეგი უკვე გაგზავნილია.';
+function jsonRequest(path,body){return fetch(SUPABASE_URL.replace(/\/$/,'')+'/rest/v1/'+path,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':'Bearer '+SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify(body)}).then(async r=>{const t=await r.text();let j;try{j=t?JSON.parse(t):null}catch{j=t}if(!r.ok)throw Error(j&&j.message?j.message:t||('HTTP '+r.status));return j})}
+async function loadResults(){if(!configured)return;try{const arr=await jsonRequest('rpc/leaderboard_crossword_scores',{p_room:room});const tbody=document.getElementById('leaderBody');tbody.replaceChildren();if(!arr.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=4;td.textContent='შედეგები ჯერ არ არის';tr.append(td);tbody.append(tr)}arr.forEach((row,i)=>{const tr=document.createElement('tr');const parts=[String(i+1),row.display_name,String(row.score)+'/100',new Date(row.submitted_at).toLocaleTimeString('ka-GE',{hour:'2-digit',minute:'2-digit',second:'2-digit'})];for(const item of parts){const td=document.createElement('td');td.textContent=item;tr.append(td)}tbody.append(tr)});document.getElementById('leaderStatus').textContent='მონაწილეები: '+arr.length+' · ბოლო განახლება: '+new Date().toLocaleTimeString('ka-GE');}catch(e){document.getElementById('leaderStatus').textContent='ვერ ჩაიტვირთა შედეგები: '+e.message}}
+function joinLink(){const u=new URL(location.href);u.search='';u.searchParams.set('room',room);return u.toString()}
+function refreshQR(){const url=joinLink();document.getElementById('joinUrl').textContent=url;if(location.protocol==='file:'){document.getElementById('qrImage').removeAttribute('src');document.getElementById('qrImage').alt='QR კოდისთვის გამოაქვეყნეთ აპლიკაცია HTTPS მისამართზე';return}document.getElementById('qrImage').src='https://api.qrserver.com/v1/create-qr-code/?size=240x240&data='+encodeURIComponent(url)}
+function renderMode(){document.body.classList.toggle('teacher-mode',mode==='teacher');const u=new URL(location.href);u.search='';u.searchParams.set('room',room);if(mode==='teacher')u.searchParams.set('teacher','1');history.replaceState(null,'',u);refreshQR();setupWarning.textContent=!configured?'⚠️ დემო რეჟიმი: QR ბმულის გაზიარება მუშაობს გამოქვეყნების შემდეგ, მაგრამ სხვადასხვა ტელეფონიდან საერთო რეიტინგისთვის ჯერ საჭიროა Supabase-ის დაკავშირება (იხილეთ README).':location.protocol==='file:'?'⚠️ ატვირთეთ HTML ვებჰოსტინგზე, რათა QR კოდმა სხვა ტელეფონებზე გახსნას აპლიკაცია.':'✅ საერთო შედეგების საცავი დაკავშირებულია. ლექტორის ეკრანი ავტომატურად განახლდება.';document.getElementById('reveal').hidden=(configured && mode==='student');document.getElementById('studentMode').classList.toggle('primary',mode==='student');document.getElementById('teacherMode').classList.toggle('primary',mode==='teacher');if(mode==='teacher')loadResults()}
+document.getElementById('studentMode').addEventListener('click',()=>{mode='student';renderMode()});document.getElementById('teacherMode').addEventListener('click',()=>{mode='teacher';renderMode()});
+roomInput.addEventListener('change',()=>{room=roomInput.value.toUpperCase().replace(/[^A-Z0-9_-]/g,'').slice(0,30)||'CLASS2026';roomInput.value=room;submitted=localStorage.getItem('crosswordSubmitted:'+room)==='1';submitBtn.disabled=submitted;renderMode()});
+document.getElementById('copyLink').addEventListener('click',()=>{if(navigator.clipboard)navigator.clipboard.writeText(joinLink()).then(()=>alert('ბმული დაკოპირებულია')).catch(()=>prompt('დააკოპირეთ:',joinLink()));else prompt('დააკოპირეთ:',joinLink())});
+document.getElementById('refreshScores').addEventListener('click',loadResults);
+submitBtn.addEventListener('click',async()=>{const name=studentName.value.trim();if(name.length<2){alert('შეიყვანეთ სახელი (მინიმუმ 2 სიმბოლო)');studentName.focus();return}if(!configured){alert('საერთო რეიტინგი ჯერ დაკავშირებული არ არის. მასწავლებელმა უნდა მიუთითოს Supabase-ის პარამეტრები HTML ფაილში.');return}if(revealed){alert('სწორი პასუხების ჩვენების შემდეგ შედეგის გაგზავნა არ შეიძლება.');return}if(submitted){alert('ამ ოთახში შედეგი უკვე გაგზავნილია.');return}if(latestScore===null){alert('ჯერ დააჭირეთ „პასუხების შემოწმებას“.');return}
+localStorage.setItem('crosswordName',name);const letters=[];for(let r=0;r<H;r++)for(let c=0;c<W;c++){const inp=inputs.get(keys(r,c));letters.push(inp?inp.value.toUpperCase():'')}
+submitBtn.disabled=true;document.getElementById('submitStatus').textContent='შედეგი იგზავნება...';try{const result=await jsonRequest('rpc/submit_crossword_score',{p_room:room,p_token:participantToken,p_name:name,p_letters:letters});const points=typeof result==='number'?result:latestScore;submitted=true;localStorage.setItem('crosswordSubmitted:'+room,'1');document.getElementById('submitStatus').textContent='✅ შედეგი მიღებულია: '+points+'/100. ლექტორის ეკრანზე გამოჩნდება თქვენი ქულა.';}catch(e){submitBtn.disabled=false;document.getElementById('submitStatus').textContent='❌ გაგზავნა ვერ მოხერხდა: '+e.message}});
+// Polling avoids extra Realtime publication settings and works on basic hosting.
+setInterval(()=>{if(mode==='teacher' && configured)loadResults()},2500);
+renderMode();
+</script></body></html>
